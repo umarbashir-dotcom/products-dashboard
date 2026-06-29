@@ -6,7 +6,7 @@ const getProducts = async (req, res, next) =>{
         limit = Number(limit)
     }
     console.log('limit inside controller',limit)
-    const products = await findProducts(limit)
+    const products = await findProducts()
     console.log(products)
     return res.status(200).json(products)
 }

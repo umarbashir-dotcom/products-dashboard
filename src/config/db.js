@@ -1,11 +1,11 @@
 import { MongoClient } from "mongodb"
 
-const uri = process.env.MONGO_URI
+// const uri = process.env.MONGO_URI
 let db;
 
 const connectDB = async () =>{
     try{
-        const client = new MongoClient(uri)
+        const client = new MongoClient(process.env.MONGO_URI)
         await client.connect()
         console.log("MongoDB Connected")
         db = client.db("store_db")  // db name

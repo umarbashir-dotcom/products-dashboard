@@ -6,10 +6,10 @@ const findProducts = async (limit) =>{
     let productsCollection = db.collection("products")
 
     let query = productsCollection.find()
-    console.log('limit inside model',limit)
-    if(limit && limit > -1){
-        query = query.limit(limit)
-    }
+    // console.log('limit inside model',limit)
+    // if(limit && limit > -1){
+    //     query = query.limit(limit)
+    // }
 
     return await query.toArray()
 }
