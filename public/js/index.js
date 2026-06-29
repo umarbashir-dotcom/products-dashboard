@@ -28,11 +28,13 @@ let products = [];
 
 async function loadProducts() {
   // TODO: replace with `const res = await fetch('/products'); products = await res.json();`
-  let res = await fetch("https://products-dashboard-xt6c.onrender.com/api/products")
+  let res = await fetch("/api/products")
   let data = await res.json();
   console.log(data)
-  data.forEach(product => products.push(product))
-  render();
+  if(res.ok){
+    data.forEach(product => products.push(product))
+    render();
+  }
 }
 
 async function createProduct(data) {
