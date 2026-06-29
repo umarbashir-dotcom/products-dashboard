@@ -1,0 +1,20 @@
+{
+  "name": "products-dashboard",
+  "version": "1.0.0",
+  "description": "Admin dashboard for managing products",
+  "license": "MIT",
+  "author": "Umar",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --watch --env-file=.env ./src/app.js"
+  },
+  "dependencies": {
+    "colors": "^1.4.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongodb": "^7.3.0"
+  }
+}

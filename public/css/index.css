@@ -1,0 +1,267 @@
+:root{
+    --ink:#1c2b22;
+    --paper:#f6f3ea;
+    --rind:#2f5233;
+    --rind-deep:#1f3a23;
+    --mustard:#d99a2b;
+    --tag-red:#b3432b;
+    --line:#d8d2c2;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+  }
+
+  .display{
+    font-family:'Space Grotesk', sans-serif;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* ===== Top bar ===== */
+  .topbar{
+    background:var(--rind-deep);
+    border-bottom:3px solid var(--mustard);
+  }
+  .brand-mark{
+    width:38px;height:38px;
+    border-radius:8px;
+    background:var(--mustard);
+    color:var(--rind-deep);
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:1.05rem;
+    flex-shrink:0;
+  }
+  .brand-name{
+    color:var(--paper);
+    letter-spacing:-0.01em;
+  }
+  .admin-chip{
+    background:rgba(217,154,43,0.16);
+    border:1px solid var(--mustard);
+    color:var(--mustard);
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:0.3rem 0.7rem;
+    border-radius:20px;
+    font-weight:600;
+  }
+
+  /* ===== Hero strip ===== */
+  .stock-strip{
+    background:var(--rind);
+    color:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .stock-strip .figure{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size:1.6rem;
+    line-height:1;
+  }
+  .stock-strip .label{
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    opacity:0.75;
+  }
+  .stock-divider{
+    width:1px;
+    background:rgba(246,243,234,0.18);
+  }
+
+  /* ===== Section heading ===== */
+  .shelf-label{
+    font-size:0.78rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--rind);
+    font-weight:600;
+  }
+  .shelf-rule{
+    flex:1;
+    height:1px;
+    background:repeating-linear-gradient(90deg, var(--line) 0 6px, transparent 6px 11px);
+  }
+
+  /* ===== Product card ("hot card") ===== */
+  .product-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+    transition:transform 0.18s ease, box-shadow 0.18s ease;
+    position:relative;
+  }
+  .product-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 24px -8px rgba(31,58,35,0.25);
+  }
+  .product-card .price-tag{
+    position:absolute;
+    top:14px;
+    right:-1px;
+    background:var(--tag-red);
+    color:#fff;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:0.95rem;
+    padding:0.3rem 0.8rem 0.3rem 0.9rem;
+    border-radius:6px 0 0 6px;
+  }
+  .product-card .price-tag::after{
+    content:"";
+    position:absolute;
+    right:-7px; top:50%;
+    transform:translateY(-50%);
+    border-style:solid;
+    border-width:7px 0 7px 7px;
+    border-color:transparent transparent transparent var(--tag-red);
+  }
+  .product-card .discount-flag{
+    background:var(--mustard);
+    color:var(--rind-deep);
+    font-size:0.68rem;
+    font-weight:700;
+    letter-spacing:0.03em;
+    padding:0.18rem 0.5rem;
+    border-radius:20px;
+    display:inline-flex;
+    align-items:center;
+    gap:0.25rem;
+  }
+  .product-name{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:1.15rem;
+    color:var(--ink);
+  }
+  .product-qty{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.82rem;
+    color:#6b7268;
+  }
+  .card-actions{
+    border-top:1px dashed var(--line);
+    background:#fbfaf6;
+  }
+  .card-actions .btn{
+    font-size:0.82rem;
+    font-weight:600;
+    border-radius:0;
+  }
+  .btn-edit{
+    color:var(--rind-deep);
+  }
+  .btn-edit:hover{
+    background:rgba(47,82,51,0.08);
+    color:var(--rind-deep);
+  }
+  .btn-delete{
+    color:var(--tag-red);
+  }
+  .btn-delete:hover{
+    background:rgba(179,67,43,0.08);
+    color:var(--tag-red);
+  }
+
+  /* ===== Add product card (dashed slot) ===== */
+  .add-slot{
+    border:2px dashed var(--line);
+    border-radius:14px;
+    background:transparent;
+    color:var(--rind);
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:0.5rem;
+    cursor:pointer;
+    transition:border-color 0.15s ease, background 0.15s ease;
+    padding:2rem 1rem;
+  }
+  .add-slot:hover{
+    border-color:var(--rind);
+    background:rgba(47,82,51,0.04);
+  }
+  .add-slot .plus-ring{
+    width:46px;height:46px;
+    border-radius:50%;
+    border:2px solid var(--rind);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.4rem;
+    font-weight:300;
+  }
+  .add-slot .add-label{
+    font-weight:600;
+    font-size:0.9rem;
+  }
+
+  /* ===== Empty state ===== */
+  .empty-state{
+    border:1px dashed var(--line);
+    border-radius:14px;
+    background:#fbfaf6;
+  }
+
+  /* ===== Buttons ===== */
+  .btn-rind{
+    background:var(--rind);
+    border-color:var(--rind);
+    color:#fff;
+    font-weight:600;
+  }
+  .btn-rind:hover{
+    background:var(--rind-deep);
+    border-color:var(--rind-deep);
+    color:#fff;
+  }
+
+  /* ===== Modal ===== */
+  .modal-content{
+    border-radius:14px;
+    border:none;
+  }
+  .modal-header{
+    border-bottom:1px solid var(--line);
+  }
+  .modal-title{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+  }
+  .form-label{
+    font-size:0.8rem;
+    font-weight:600;
+    letter-spacing:0.02em;
+    color:var(--rind-deep);
+  }
+  .form-control:focus{
+    border-color:var(--rind);
+    box-shadow:0 0 0 0.2rem rgba(47,82,51,0.15);
+  }
+
+  /* Skip link / focus visibility */
+  .btn:focus-visible, .form-control:focus-visible, .add-slot:focus-visible{
+    outline:2px solid var(--mustard);
+    outline-offset:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .product-card{ transition:none; }
+  }
+
+  footer.app-footer{
+    border-top:1px solid var(--line);
+    background:#fbfaf6;
+  }

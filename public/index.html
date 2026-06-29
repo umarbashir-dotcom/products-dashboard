@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rana's Store — Admin</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar py-3">
+  <div class="container d-flex align-items-center justify-content-between">
+    <div class="d-flex align-items-center gap-3">
+      <div class="brand-mark">RS</div>
+      <div>
+        <div class="brand-name display fw-600 fs-5 lh-1">Rana's Store</div>
+        <div class="mono" style="color:#a8b8a0; font-size:0.7rem;">stock control</div>
+      </div>
+    </div>
+    <span class="admin-chip">Admin mode</span>
+  </div>
+</header>
+
+<!-- ============ STOCK SUMMARY STRIP ============ -->
+<div class="stock-strip py-3">
+  <div class="container">
+    <div class="row g-0 align-items-center text-center text-sm-start">
+      <div class="col-4 col-sm-auto pe-sm-4">
+        <div class="figure" id="statTotal">0</div>
+        <div class="label">items listed</div>
+      </div>
+      <div class="col-auto stock-divider d-none d-sm-block" style="height:32px;"></div>
+      <div class="col-4 col-sm-auto px-sm-4">
+        <div class="figure" id="statDiscounted">0</div>
+        <div class="label">on discount</div>
+      </div>
+      <div class="col-auto stock-divider d-none d-sm-block" style="height:32px;"></div>
+      <div class="col-4 col-sm-auto ps-sm-4">
+        <div class="figure mono" id="statValue">Rs 0</div>
+        <div class="label">shelf value</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ MAIN ============ -->
+<main class="container py-5">
+
+  <div class="d-flex align-items-center gap-3 mb-4">
+    <span class="shelf-label">Current shelf</span>
+    <div class="shelf-rule"></div>
+  </div>
+
+  <div class="row g-4" id="productGrid">
+    <!-- Product cards + add-slot are injected here by JS -->
+  </div>
+
+  <!-- Empty state (hidden unless list is empty) -->
+  <div class="empty-state d-none text-center py-5 px-4 mt-2" id="emptyState">
+    <div class="display fw-600 fs-5 mb-1">The shelf is empty</div>
+    <p class="text-muted mb-3" style="max-width:380px; margin-inline:auto;">
+      Nothing is listed yet. Add the first product to start tracking stock.
+    </p>
+    <button class="btn btn-rind px-4" type="button" onclick="openAddModal()">Add product</button>
+  </div>
+
+</main>
+
+<footer class="app-footer py-4">
+  <div class="container d-flex flex-wrap justify-content-between gap-2 text-muted" style="font-size:0.82rem;">
+    <span>Rana's Store admin panel</span>
+    <span class="mono">Manage - Products</span>
+  </div>
+</footer>
+
+<!-- ============ ADD / EDIT MODAL ============ -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productModalTitle">Add product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form id="productForm">
+        <div class="modal-body">
+          <input type="hidden" id="productId">
+
+          <div class="mb-3">
+            <label class="form-label" for="fieldName">Product name</label>
+            <input type="text" class="form-control" id="fieldName" placeholder="e.g. Olpers milk" required>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-6">
+              <label class="form-label" for="fieldQuantity">Quantity / size</label>
+              <input type="text" class="form-control" id="fieldQuantity" placeholder="e.g. 100ml" required>
+            </div>
+            <div class="col-6">
+              <label class="form-label" for="fieldPrice">Price (Rs)</label>
+              <input type="number" min="0" step="1" class="form-control" id="fieldPrice" placeholder="500" required>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <label class="form-label" for="fieldDiscount">Discount (Rs, optional)</label>
+            <input type="number" min="0" step="1" class="form-control" id="fieldDiscount" placeholder="0">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-rind px-4" id="productFormSubmit">Add product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DELETE CONFIRM MODAL ============ -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Remove product?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-0">
+          This removes <strong id="deleteProductName">this item</strong> from the shelf. This can't be undone.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn" style="background:var(--tag-red); color:#fff; font-weight:600;" id="confirmDeleteBtn">Remove</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script  src="./js/index.js"></script>
+</body>
+</html>
