@@ -13,10 +13,10 @@
    call render() (or re-fetch + render) once the request resolves.
    ===================================================================== */
 
-let API_BASE = "https://products-dashboard-xt6c.onrender.com//api/products"
+let API_BASE = "https://products-dashboard-xt6c.onrender.com/api/products"
 
 const checkAuthStatus = async () =>{
-  let res = await fetch("/https://products-dashboard-xt6c.onrender.com/auth/status")
+  let res = await fetch("https://products-dashboard-xt6c.onrender.com/auth/status")
       if(res.ok){
           res = await res.json()
           return res.authenticated
