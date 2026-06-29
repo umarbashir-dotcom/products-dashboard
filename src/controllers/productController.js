@@ -2,7 +2,10 @@ import {findProducts, insertProduct, deleteProductById, updateProductById, findP
 
 const getProducts = async (req, res, next) =>{
     const limit = req.query.limit
-    const products = await findProducts(Number(limit))
+    if (limit){
+        limit = Number(limit)
+    }
+    const products = await findProducts(limit)
     return res.status(200).json(products)
 }
 
