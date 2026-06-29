@@ -12,8 +12,11 @@
    Replace the in-memory logic inside each with a fetch() call, then
    call render() (or re-fetch + render) once the request resolves.
    ===================================================================== */
+
+let API_BASE = "https://products-dashboard-xt6c.onrender.com//api/products"
+
 const checkAuthStatus = async () =>{
-  let res = await fetch("/auth/status")
+  let res = await fetch("/https://products-dashboard-xt6c.onrender.com/auth/status")
       if(res.ok){
           res = await res.json()
           return res.authenticated
@@ -25,7 +28,7 @@ let products = [];
 
 async function loadProducts() {
   // TODO: replace with `const res = await fetch('/products'); products = await res.json();`
-  let res = await fetch("/api/products")
+  let res = await fetch("https://products-dashboard-xt6c.onrender.com/api/products")
   let data = await res.json();
   console.log(data)
   data.forEach(product => products.push(product))
